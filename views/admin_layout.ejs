@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin - Civic Mitra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .admin-header { background: rgba(30, 41, 59, 0.95); border-bottom: 1px solid var(--border); }
+      .admin-header nav { display: flex; gap: 1rem; align-items: center; }
+      .admin-danger { background: rgba(239, 68, 68, 0.15); color: #fca5a5; padding: 0.25rem 0.5rem; font-size: 0.8rem; }
+    </style>
+  </head>
+  <body>
+    <header class="topbar admin-header">
+      <div class="brand">
+        <a href="/admin/dashboard">Admin · Civic Mitra</a>
+      </div>
+      <nav>
+        <form method="POST" action="/admin/logout" class="inline-form">
+          <button type="submit" class="btn-secondary">Logout</button>
+        </form>
+      </nav>
+    </header>
+    <main class="container">
+      <%- body %>
+    </main>
+    <footer class="footer">
+      <span>Admin dashboard · Civic Mitra</span>
+    </footer>
+  </body>
+</html>

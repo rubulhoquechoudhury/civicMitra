@@ -1,0 +1,55 @@
+<section class="card">
+  <h2><%= user.authority_state && user.authority_district ? 'Reports for ' + user.authority_district + ', ' + user.authority_state : 'All civic reports' %></h2>
+  <% if (!reports.length) { %>
+  <p class="muted">No reports yet.</p>
+  <% } else { %>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Status</th>
+          <th>Change status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reports.forEach(r => { %>
+        <tr>
+          <td>#<%= r.id %></td>
+          <td>
+            <%= r.state %>, <%= r.district %>, <%= r.post_office %> - <%= r.pincode %>
+          </td>
+          <td><%= r.civic_type %></td>
+          <td class="description-cell"><%= r.description || '-' %></td>
+          <td>
+            <% if (r.image_path) { %>
+            <a href="<%= r.image_path %>" target="_blank">View</a>
+            <% } else { %>
+            <span class="muted">No image</span>
+            <% } %>
+          </td>
+          <td>
+            <span class="status-pill status-<%= r.status %>"><%= r.status %></span>
+          </td>
+          <td>
+            <form method="POST" action="/authority/report/<%= r.id %>/status" class="inline-form">
+              <select name="status">
+                <option value="unsolved" <%= r.status === 'unsolved' ? 'selected' : '' %>>Unsolved</option>
+                <option value="pending" <%= r.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                <option value="resolved" <%= r.status === 'resolved' ? 'selected' : '' %>>Resolved</option>
+              </select>
+              <button type="submit" class="btn-secondary">Update</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</section>
+

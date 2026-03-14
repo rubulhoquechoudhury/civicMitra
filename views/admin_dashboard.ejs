@@ -1,0 +1,88 @@
+<section class="card">
+  <h2>Super Admin Dashboard</h2>
+  <p class="muted">View and manage all users and reports.</p>
+
+  <h3 style="margin-top: 2rem;">Registered Users</h3>
+  <% if (!users.length) { %>
+  <p class="muted">No users registered.</p>
+  <% } else { %>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Authority Code</th>
+          <th>State / District</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(u => { %>
+        <tr>
+          <td>#<%= u.id %></td>
+          <td><%= u.email %></td>
+          <td><span class="status-pill status-<%= u.role %>"><%= u.role %></span></td>
+          <td><%= u.authority_code || '-' %></td>
+          <td><%= (u.authority_state && u.authority_district) ? u.authority_district + ', ' + u.authority_state : '-' %></td>
+          <td>
+            <form method="POST" action="/admin/delete-user/<%= u.id %>" class="inline-form" onsubmit="return confirm('Delete this user and all their reports?');">
+              <button type="submit" class="btn-secondary admin-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+
+  <h3 style="margin-top: 2.5rem;">Civic Reports</h3>
+  <% if (!reports.length) { %>
+  <p class="muted">No reports yet.</p>
+  <% } else { %>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Reporter ID</th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reports.forEach(r => { %>
+        <tr>
+          <td>#<%= r.id %></td>
+          <td><%= r.reporter_id || '-' %></td>
+          <td><%= r.state %>, <%= r.district %> - <%= r.pincode %></td>
+          <td><%= r.civic_type %></td>
+          <td class="description-cell"><%= (r.description || '-').substring(0, 50) %><%= (r.description && r.description.length > 50) ? '...' : '' %></td>
+          <td>
+            <% if (r.image_path) { %>
+            <a href="<%= r.image_path %>" target="_blank">View</a>
+            <% } else { %>
+            <span class="muted">-</span>
+            <% } %>
+          </td>
+          <td><span class="status-pill status-<%= r.status %>"><%= r.status %></span></td>
+          <td><%= new Date(r.created_at).toLocaleDateString() %></td>
+          <td>
+            <form method="POST" action="/admin/delete-report/<%= r.id %>" class="inline-form" onsubmit="return confirm('Delete this report?');">
+              <button type="submit" class="btn-secondary admin-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</section>

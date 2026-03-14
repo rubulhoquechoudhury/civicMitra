@@ -1,0 +1,40 @@
+<section class="card">
+  <div class="card-header">
+    <h2>Your reports</h2>
+    <a href="/report/new" class="btn-primary">New report</a>
+  </div>
+
+  <% if (!reports.length) { %>
+  <p class="muted">You haven't reported any issues yet.</p>
+  <% } else { %>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reports.forEach(r => { %>
+        <tr>
+          <td>#<%= r.id %></td>
+          <td>
+            <%= r.state %>, <%= r.district %>, <%= r.post_office %> - <%= r.pincode %>
+          </td>
+          <td><%= r.civic_type %></td>
+          <td>
+            <span class="status-pill status-<%= r.status %>"><%= r.status %></span>
+          </td>
+          <td><%= r.created_at %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</section>
+

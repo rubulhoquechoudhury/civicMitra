@@ -1,0 +1,49 @@
+<section class="card">
+  <h2>Login</h2>
+  <% if (error) { %>
+  <div class="alert"><%= error %></div>
+  <% } %>
+  <form method="POST" action="/login" class="form">
+    <label>
+      Email
+      <input type="email" name="email" required />
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required />
+    </label>
+    <label>
+      I am a
+      <select name="role" id="role-select" required>
+        <option value="citizen">Citizen</option>
+        <option value="authority">Authority</option>
+      </select>
+    </label>
+    <label id="authority-code-field" style="display:none;">
+      Authority unique ID
+      <input type="text" name="authority_code" />
+    </label>
+    <button type="submit" class="btn-primary full-width">Login</button>
+    <p class="muted">
+      New here?
+      <a href="/signup">Create an account</a>
+    </p>
+  </form>
+</section>
+
+<script>
+  const roleSelect = document.getElementById('role-select');
+  const authorityField = document.getElementById('authority-code-field');
+  function toggleAuthorityField() {
+    if (roleSelect.value === 'authority') {
+      authorityField.style.display = 'block';
+      authorityField.querySelector('input').setAttribute('required', 'required');
+    } else {
+      authorityField.style.display = 'none';
+      authorityField.querySelector('input').removeAttribute('required');
+    }
+  }
+  roleSelect.addEventListener('change', toggleAuthorityField);
+  toggleAuthorityField();
+</script>
+

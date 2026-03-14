@@ -1,0 +1,19 @@
+<section class="hero">
+  <h1>Your voice shapes your community</h1>
+  <p>
+    Report civic issues—garbage, road damage, water logging, street lights—in your area.
+    Upload a photo, pick the location, and your report reaches the right authority. Your identity stays private.
+  </p>
+
+  <% if (!user) { %>
+  <div class="cta-buttons">
+    <a class="btn-primary" href="/signup">Report an issue</a>
+    <a class="btn-secondary" href="/login">Login</a>
+  </div>
+  <% } else if (user.role === 'citizen') { %>
+  <a class="btn-primary" href="/citizen/dashboard">Your dashboard</a>
+  <% } else { %>
+  <a class="btn-primary" href="/authority/dashboard">Authority dashboard</a>
+  <% } %>
+</section>
+

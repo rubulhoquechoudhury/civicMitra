@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Login - Civic Mitra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><a href="/">Civic Mitra</a></div>
+      <nav><a href="/" class="btn-link">Back to app</a></nav>
+    </header>
+    <main class="container">
+      <section class="card">
+        <h2>Admin login</h2>
+        <% if (error) { %>
+        <div class="alert"><%= error %></div>
+        <% } %>
+        <form method="POST" action="/admin/login" class="form">
+          <label>
+            Username
+            <input type="text" name="username" required autocomplete="username" />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" required autocomplete="current-password" />
+          </label>
+          <button type="submit" class="btn-primary full-width">Login</button>
+        </form>
+      </section>
+    </main>
+    <footer class="footer">
+      <span>Civic Mitra — Admin</span>
+    </footer>
+  </body>
+</html>
