@@ -1,8 +1,8 @@
-# CivicPulse
+# CivicMitra
 
 ## About
 
-CivicPulse is a civic issue reporting platform. Citizens can submit reports (potholes, garbage, street lights, etc.) with optional photo evidence. Authorities get a dashboard to view and manage reports by state and district.
+CivicMitra is a civic issue reporting platform. Citizens can submit reports (potholes, garbage, street lights, etc.) with optional photo evidence. Authorities get a dashboard to view and manage reports by state and district.
 
 ## Why We Built It
 
